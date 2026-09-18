@@ -1,14 +1,15 @@
-# Pre teba – Netlify verzia
+# Pre teba
 
-Táto verzia ukladá herné výsledky online cez Netlify Blobs a zobrazí ich v skrytom admin paneli.
+Statická webová aplikácia s odomykaním Kľúča a súkromným admin panelom.
 
-## Nasadenie
+## Pred nasadením
 
-1. Nahrajte celý obsah tohto priečinka do repozitára `pre-teba-app`.
-2. V Netlify vyberte **Add new site → Import an existing project → GitHub** a zvoľte repozitár.
-3. V **Project configuration → Environment variables** pridajte premennú `ADMIN_PIN` s hodnotou `d1234`.
-4. Spustite **Deploy**.
+1. V Supabase vytvor nový projekt.
+2. V **SQL Editor** spusti obsah súboru `supabase-schema.sql` a zmeň `admin@example.com` na svoj e-mail.
+3. V **Authentication → Users** si vytvor používateľa s týmto e-mailom a silným heslom.
+4. V **Connect → App Frameworks → JavaScript** skopíruj Project URL a Publishable key do `supabase-config.js`.
+5. Po nasadení otvor `https://tvoja-adresa.netlify.app/#admin` a prihlás sa vytvoreným účtom.
 
-Po nasadení hráč používa aplikáciu normálne. Keď zadá prezývku a niečo dokončí, stav sa odošle do Netlify Blobs. Admin otvorí panel piatimi ťuknutiami na „PRE TEBA“, zadá `d1234` a uvidí všetkých hráčov.
+Odpovede sa odosielajú do databázy pri dokončení každej hry. Verejná aplikácia môže iba pridávať záznamy; prečítať ich môže iba e-mail správcu nastavený v RLS pravidle.
 
-PIN je kontrolovaný na serveri; neuvádzajte ho vo verejnom JavaScripte.
+Nikdy nepoužívaj ani nezverejňuj Supabase `service_role` kľúč.
